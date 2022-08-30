@@ -1,5 +1,4 @@
 local component = require("component")
-local modem = require("modem")
 local event = require("event")
 local serialization = require("serialization")
 local sides = require("sides")
@@ -7,6 +6,7 @@ local sides = require("sides")
 local trading = component.trading
 local robot = component.robot
 local item = {type = nil, value = nil}
+local modem = component.modem
 
 local invCnt = component.inventory_controller
 

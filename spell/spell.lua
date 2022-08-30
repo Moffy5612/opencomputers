@@ -1,10 +1,10 @@
 local component = require("component")
-local modem = require("modem")
 local event = require("event")
 local serialization = require("serialization")
 local sides = require("sides")
 
 local interface = component.block_refinedstorage_interface
+local modem = component.modem
 
 local discoveredBooksMeta = {}
 local boughtWand = {}
