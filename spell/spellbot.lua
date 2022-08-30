@@ -42,11 +42,13 @@ modem.open(port)
 while true do
     local trades = trading.getTrades()
     for key, tr in pairs(trades) do
-        local output = tr.getOutput()
-        if output.name == "ebwizardry:spell_book" then
-            trade("book", output.damage, tr)
-        elseif string.find(output.name, "master") ~= nil then
-            trade("wand", output.name, tr)
+        if type(tr) == "table" then
+            local output = tr.getOutput()
+            if output.name == "ebwizardry:spell_book" then
+                trade("book", output.damage, tr)
+            elseif string.find(output.name, "master") ~= nil then
+                trade("wand", output.name, tr)
+            end
         end
     end
     robot.swing(sides.front)
