@@ -34,14 +34,7 @@ local function trade(type, value, t)
             table.insert(remain, stack)
         end
         modem.broadcast(port, serialization.serialize(remain))
-        os.sleep(3)
-        robot.turn(false)
-        for i = 1, 4, 1 do
-            robot.select(i)
-            invCnt.suckFromSlot(sides.front, i)
-        end
-        robot.turn(true)
-        os.sleep(1)
+        os.sleep(2)
     end
 end
 
@@ -51,10 +44,12 @@ while true do
     for key, tr in pairs(trades) do
         if type(tr) == "table" then
             local output = tr.getOutput()
-            if output.name == "ebwizardry:spell_book" then
-                trade("book", output.damage, tr)
-            elseif string.find(output.name, "master") ~= nil then
-                trade("wand", output.name, tr)
+            if output ~= nil then
+                if output.name == "ebwizardry:spell_book" then
+                    trade("book", output.damage, tr)
+                elseif string.find(output.name, "master") ~= nil then
+                    trade("wand", output.name, tr)
+                end
             end
         end
     end
