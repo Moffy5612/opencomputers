@@ -25,10 +25,10 @@ local function trade(type, value, t)
         t.trade()
         robot.turn(true)
         robot.turn(true)
-        robot.select(6)
-        invCnt.dropIntoSlot(sides.front, 1)
-        robot.select(7)
-        invCnt.dropIntoSlot(sides.front, 1)
+        for i = 6, 16, 1 do
+            robot.select(i)
+            invCnt.dropIntoSlot(sides.front, 1)
+        end
         robot.turn(false)
         robot.turn(false)
 
