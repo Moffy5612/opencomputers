@@ -35,6 +35,13 @@ local function trade(type, value, t)
         end
         modem.broadcast(port, serialization.serialize(remain))
         os.sleep(2)
+        robot.turn(false)
+        for i = 1, 4, 1 do
+            robot.select(i)
+            invCnt.suckFromSlot(sides.front, i)
+        end
+        robot.turn(true)
+        os.sleep(1)
     end
 end
 
