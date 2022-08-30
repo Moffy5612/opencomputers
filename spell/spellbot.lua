@@ -9,6 +9,7 @@ local item = {type = nil, value = nil}
 local modem = component.modem
 
 local invCnt = component.inventory_controller
+local generator = component.generator
 
 local port = 8000
 
@@ -22,21 +23,21 @@ local function trade(type, value, t)
     local _, _, from, _, _, recv = event.pull("modem_message")
     if recv == "notfound" then
         t.trade()
-        robot.select(5)
+        robot.select(6)
         robot.turn(true)
         robot.turn(true)
         invCnt.dropIntoSlot(sides.front, 1)
         robot.turn(false)
         robot.turn(false)
 
-        for i = 1, 4, 1 do
+        for i = 1, 5, 1 do
             stack = invCnt.getStackInInternalSlot(i)
             table.insert(remain, stack)
         end
         modem.broadcast(port, serialization.serialize(remain))
         os.sleep(2)
         robot.turn(false)
-        for i = 1, 4, 1 do
+        for i = 1, 5, 1 do
             robot.select(i)
             invCnt.suckFromSlot(sides.front, i)
         end
@@ -60,5 +61,10 @@ while true do
             end
         end
     end
+    if generator.count() < 64 then
+        robot.select(5)
+        generator.insert(64 - generator.count())
+    end
     robot.swing(sides.front)
+    os.sleep(2)
 end
