@@ -129,8 +129,8 @@ invCnt.dropIntoSlot(sides.front, 2)
 robot.select(3)
 invCnt.dropIntoSlot(sides.front, 1)
 
-[[ redstone.setOutput(sides.front, 15)
+redstone.setOutput(sides.front, 15)
 os.sleep(0.02)
 redstone.setOutput(sides.front, 0)
 os.sleep(15)
-chunkloader.setActive(false) ]]
+chunkloader.setActive(false)
